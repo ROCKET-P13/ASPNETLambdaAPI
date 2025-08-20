@@ -51,9 +51,9 @@ export class LambdaApiInfrastructureStack extends cdk.Stack {
 
 		const apiLambda = new lambda.Function(this, 'ApiLambda', {
 			runtime: lambda.Runtime.DOTNET_8,
-			handler: 'ServerlessAPI::ServerlessAPI.LambdaEntryPoint::FunctionHandlerAsync',
+			handler: 'ASPNETLambdaAPI::ASPNETLambdaAPI.LambdaEntryPoint::FunctionHandlerAsync',
 			code: lambda.Code.fromAsset(
-				path.join(__dirname, '../../src/ServerlessAPI/bin/Release/net8.0/publish')
+				path.join(__dirname, '../../ASPNETLambdaAPI/bin/Release/net8.0/publish')
 			),
 			vpc,
 			timeout: cdk.Duration.seconds(30),
@@ -64,14 +64,14 @@ export class LambdaApiInfrastructureStack extends cdk.Stack {
 				POSTGRES_SECRET_ARN: dbSecret.secretArn,
 				DB_HOST: dbInstance.dbInstanceEndpointAddress,
 				DB_PORT: dbInstance.dbInstanceEndpointPort,
-				DB_NAME: 'appdb',
+				DB_NAME: 'books',
 			},
 		});
 
 		dbSecret.grantRead(apiLambda);
 
 		const httpApi = new apigw.HttpApi(this, 'ApiGateway', {
-			apiName: 'ServerlessApi',
+			apiName: 'ASPNETLambdaAPI',
 			description: 'HTTP API for ASP.NET Core on Lambda',
 		});
 

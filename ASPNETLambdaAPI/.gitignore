@@ -4,13 +4,8 @@ obj
 out
 
 # ASP.NET Core secrets
-appsettings.Development.json
+appsettings.json
 
 # Entity Framework
 Migrations/*.Designer.cs
 Migrations/*.csproj
-
-# dotnet watch
-Properties/launchSettings.json
-
-Properties/launchSettings.json
