@@ -17,13 +17,8 @@ public class Startup(IConfiguration configuration)
     {
 
         var secretArn = Configuration["POSTGRES_SECRET_ARN"];
-        var host = Configuration["DB_HOST"];
-        var databaseName = Configuration["DB_NAME"];
-        var port = Configuration["DB_PORT"];
 
-        string username = null;
-        string password = null;
-        string connectionString = null;
+        string connectionString = "";
 
         if (!string.IsNullOrEmpty(secretArn))
         {
@@ -34,11 +29,16 @@ public class Startup(IConfiguration configuration)
             }).Result;
 
             var secretJson = JsonDocument.Parse(secretValue.SecretString);
-            username = secretJson.RootElement.GetProperty("username").GetString();
-            password = secretJson.RootElement.GetProperty("password").GetString();
+            var username = secretJson.RootElement.GetProperty("username").GetString();
+            var password = secretJson.RootElement.GetProperty("password").GetString();
+
+            var host = Configuration["DB_HOST"];
+            var databaseName = Configuration["DB_NAME"];
+            var port = Configuration["DB_PORT"];
+        
             connectionString = $"Host={host};Port={port};Username={username};Password={password};Database={databaseName};Pooling=true";
         } else {
-            connectionString = Configuration.GetConnectionString("Postgres");
+            connectionString = Configuration.GetConnectionString("Postgres") ?? "";
         }
 
 
