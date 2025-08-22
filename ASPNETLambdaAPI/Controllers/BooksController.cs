@@ -3,15 +3,22 @@ using ASPNETLambdaAPI.Entities;
 using ASPNETLambdaAPI.Repositories;
 using ASPNETLambdaAPI.Repositories.Interfaces;
 using ASPNETLambdaAPI.Finders.BookFinder.Interfaces;
+using ASPNETLambdaAPI.DTOs.Requests;
+using ASPNETLambdaAPI.Factories.BookFactory.Interfaces;
 
 namespace ASPNETLambdaAPI.Controllers;
 
 [Route("api/[controller]")]
 [Produces("application/json")]
-public class BooksController(IBookRepository bookRepository, IBookFinder bookFinder) : ControllerBase
+public class BooksController(
+	IBookRepository bookRepository,
+	IBookFinder bookFinder,
+	IBookFactory bookFactory
+	) : ControllerBase
 {
 	private readonly IBookRepository _bookRepository = bookRepository;
 	private readonly IBookFinder _bookFinder = bookFinder;
+	private readonly IBookFactory _bookFactory = bookFactory;
 
 	[HttpGet]
 	public async Task<ActionResult<List<Book>>> GetAll () {
@@ -21,8 +28,9 @@ public class BooksController(IBookRepository bookRepository, IBookFinder bookFin
 
 
 	[HttpPost]
-	public async Task<ActionResult<Book>> Post([FromBody] Book book)
+	public async Task<ActionResult<Book>> Post([FromBody] AddBookRequest request)
 	{
+		var book = _bookFactory.FromDTO(request.Title, request.ISBN, request.CoverPage);
 		if (book == null) return ValidationProblem("Invalid input! Book not informed");
 
 		var result = await _bookRepository.SaveAsync(book);
@@ -35,6 +43,5 @@ public class BooksController(IBookRepository bookRepository, IBookFinder bookFin
 		{
 			return BadRequest("Fail to persist");
 		}
-
 	}
 }

@@ -7,6 +7,8 @@ using Amazon.SecretsManager.Model;
 using ASPNETLambdaAPI.Repositories.Interfaces;
 using ASPNETLambdaAPI.Finders.BookFinder.Interfaces;
 using ASPNETLambdaAPI.Finders.BookFinder;
+using ASPNETLambdaAPI.Factories.BookFactory.Interfaces;
+using ASPNETLambdaAPI.Factories.BookFactory;
 
 namespace ASPNETLambdaAPI;
 
@@ -51,6 +53,7 @@ public class Startup(IConfiguration configuration)
 
 		services.AddScoped<IBookRepository, BookRepository>();
 		services.AddScoped<IBookFinder, BookFinder>();
+		services.AddScoped<IBookFactory, BookFactory>();
 
 		services.AddControllers()
 		.AddJsonOptions(options =>
