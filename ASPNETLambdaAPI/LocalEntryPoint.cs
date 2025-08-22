@@ -7,16 +7,16 @@ namespace ASPNETLambdaAPI;
 /// </summary>
 public class LocalEntryPoint
 {
-    public static void Main(string[] args)
-    {
-        CreateHostBuilder(args).Build().Run();
-    }
+	public static void Main(string[] args)
+	{
+		CreateHostBuilder(args).Build().Run();
+	}
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                Env.Load();
-                webBuilder.UseStartup<Startup>();
-            });
+	public static IHostBuilder CreateHostBuilder(string[] args) =>
+		Host.CreateDefaultBuilder(args)
+			.ConfigureWebHostDefaults(webBuilder =>
+			{
+				Env.Load();
+				webBuilder.UseStartup<Startup>();
+			});
 }

@@ -10,31 +10,31 @@ namespace ASPNETLambdaAPI.Controllers;
 [Produces("application/json")]
 public class BooksController(IBookRepository bookRepository, IBookFinder bookFinder) : ControllerBase
 {
-    private readonly IBookRepository _bookRepository = bookRepository;
-    private readonly IBookFinder _bookFinder = bookFinder;
+	private readonly IBookRepository _bookRepository = bookRepository;
+	private readonly IBookFinder _bookFinder = bookFinder;
 
-    [HttpGet]
-    public async Task<ActionResult<List<Book>>> GetAll () {
-        var books = await _bookFinder.GetAll();
-        return Ok(books);
-    }
+	[HttpGet]
+	public async Task<ActionResult<List<Book>>> GetAll () {
+		var books = await _bookFinder.GetAll();
+		return Ok(books);
+	}
 
 
-    [HttpPost]
-    public async Task<ActionResult<Book>> Post([FromBody] Book book)
-    {
-        if (book == null) return ValidationProblem("Invalid input! Book not informed");
+	[HttpPost]
+	public async Task<ActionResult<Book>> Post([FromBody] Book book)
+	{
+		if (book == null) return ValidationProblem("Invalid input! Book not informed");
 
-        var result = await _bookRepository.SaveAsync(book);
+		var result = await _bookRepository.SaveAsync(book);
 
-        if (result != null)
-        {
-            return result;
-        }
-        else
-        {
-            return BadRequest("Fail to persist");
-        }
+		if (result != null)
+		{
+			return result;
+		}
+		else
+		{
+			return BadRequest("Fail to persist");
+		}
 
-    }
+	}
 }

@@ -7,9 +7,9 @@ public class AppDatabaseContext (DbContextOptions<AppDatabaseContext> options): 
 {
 	public DbSet<Book> Books { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Book>(entity =>
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		modelBuilder.Entity<Book>(entity =>
 		{
 			entity.ToTable("Book");
 			entity.Property(e => e.Id).HasColumnName("id");
@@ -18,5 +18,5 @@ public class AppDatabaseContext (DbContextOptions<AppDatabaseContext> options): 
 			entity.Property(e => e.Authors).HasColumnName("authors");
 			entity.Property(e => e.CoverPage).HasColumnName("cover_page");
 		});
-    }
+	}
 };

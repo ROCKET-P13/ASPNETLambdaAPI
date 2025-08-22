@@ -6,14 +6,14 @@ namespace ASPNETLambdaAPI.Repositories;
 
 public class BookRepository(AppDatabaseContext databaseContext) : IBookRepository
 {
-    private readonly AppDatabaseContext _databaseContext = databaseContext;
+	private readonly AppDatabaseContext _databaseContext = databaseContext;
 
-    public async Task<Book> SaveAsync(Book book)
-    {
-        _databaseContext.Books.Add(book);
+	public async Task<Book> SaveAsync(Book book)
+	{
+		_databaseContext.Books.Add(book);
 
-        await _databaseContext.SaveChangesAsync();
+		await _databaseContext.SaveChangesAsync();
 
-        return book;
-    }
+		return book;
+	}
 }
