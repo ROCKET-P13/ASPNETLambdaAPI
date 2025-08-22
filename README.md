@@ -24,7 +24,7 @@ Deleting Stack:
 
 1. `cd` into the AWS CDK infrastructure project and run:
 ```
-cdk destroy LambdaApiInfrastructureStack
+cdk destroy ASPNETLambdaAPIInfrastructureStack
 ```
 
 
