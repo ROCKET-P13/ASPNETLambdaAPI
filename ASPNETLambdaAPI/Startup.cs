@@ -5,6 +5,8 @@ using ASPNETLambdaAPI.Repositories;
 using Amazon.SecretsManager;
 using Amazon.SecretsManager.Model;
 using ASPNETLambdaAPI.Repositories.Interfaces;
+using ASPNETLambdaAPI.Finders.BookFinder.Interfaces;
+using ASPNETLambdaAPI.Finders.BookFinder;
 
 namespace ASPNETLambdaAPI;
 
@@ -48,6 +50,7 @@ public class Startup(IConfiguration configuration)
 			options.UseNpgsql(connectionString));
 
 		services.AddScoped<IBookRepository, BookRepository>();
+		services.AddScoped<IBookFinder, BookFinder>();
 
 		services.AddControllers()
 		.AddJsonOptions(options =>
