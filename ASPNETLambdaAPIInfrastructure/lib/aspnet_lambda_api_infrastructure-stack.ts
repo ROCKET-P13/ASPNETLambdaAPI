@@ -8,7 +8,7 @@ import * as apigw from 'aws-cdk-lib/aws-apigatewayv2';
 import * as integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import * as path from 'path';
 
-export class LambdaApiInfrastructureStack extends cdk.Stack {
+export class ASPNETLambdaAPIInfrastructureStack extends cdk.Stack {
 	constructor(scope: Construct, id: string, props?: cdk.StackProps) {
 		super(scope, id, props);
 

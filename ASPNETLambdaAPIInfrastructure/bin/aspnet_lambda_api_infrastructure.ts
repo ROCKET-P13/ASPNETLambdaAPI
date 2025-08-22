@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
-import { LambdaApiInfrastructureStack } from '../lib/aspnet_lambda_api_infrastructure-stack';
+import { ASPNETLambdaAPIInfrastructureStack } from '../lib/aspnet_lambda_api_infrastructure-stack';
 
 const app = new cdk.App();
-new LambdaApiInfrastructureStack(app, 'LambdaApiInfrastructureStack', {
+new ASPNETLambdaAPIInfrastructureStack(app, 'ASPNETLambdaAPIInfrastructureStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

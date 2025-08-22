@@ -13,14 +13,22 @@ dotnet lambda package --configuration Release --framework net8.0 --output-packag
 ```
 cdk bootstrap
 ```
-If you do not have a default AWS profile, you can specify the profile as such:
-
-```
-cdk bootstrap --profile MyUser-Profile
-```
 
 3. In the AWS CDK infrastructure project run:
 ```
 cdk deploy
 ```
-If you do not have a default AWS profile, specify the profile in the same manner as the step above
+
+
+Deleting Stack:
+
+1. `cd` into the AWS CDK infrastructure project and run:
+```
+cdk destroy LambdaApiInfrastructureStack
+```
+
+
+For all `cdk` commands, if you do not have a default AWS profile, specify the profile as such:
+```
+cdk bootstrap --profile MyUser-Profile
+```
